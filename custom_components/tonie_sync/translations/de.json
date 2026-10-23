@@ -1,0 +1,206 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Navidrome verbinden",
+        "description": "Zugangsdaten für die Subsonic-API von Navidrome.",
+        "data": {
+          "url": "URL",
+          "username": "Benutzer",
+          "password": "Passwort"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Navidrome nicht erreichbar.",
+      "invalid_auth": "Benutzer oder Passwort falsch."
+    },
+    "abort": {
+      "already_configured": "Dieses Navidrome-Konto ist bereits eingerichtet."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Tonies und Playlists",
+        "description": "Aktuelle Zuordnung (+ = ergänzt, ↻ = ersetzt):\n{overview}\n\nTonie wählen, um ihn zu bearbeiten; leer lassen und absenden speichert.",
+        "data": {
+          "tonie": "Tonie bearbeiten",
+          "auto_sync": "Automatisch abgleichen (alle 15 min prüfen)"
+        }
+      },
+      "tonie": {
+        "title": "{name}",
+        "description": "Navidrome-Playlist für diesen Kreativ-Tonie. „(keine)“ beendet den Abgleich (Kapitel bleiben auf dem Tonie).",
+        "data": {
+          "playlist": "Playlist",
+          "mode": "Modus"
+        }
+      }
+    },
+    "abort": {
+      "no_toniebox": "Keine Kreativ-Tonies gefunden. Ist die Toniebox-Integration eingerichtet und geladen?",
+      "cannot_connect": "Navidrome nicht erreichbar."
+    }
+  },
+  "selector": {
+    "mode": {
+      "options": {
+        "append": "Playlist ergänzt fremde Kapitel (fremde bleiben am Anfang)",
+        "replace": "Playlist ersetzt alles"
+      }
+    }
+  },
+  "entity": {
+    "button": {
+      "sync": {
+        "name": "Abgleichen"
+      }
+    },
+    "sensor": {
+      "status": {
+        "name": "Status",
+        "state": {
+          "pending": "Ausstehend",
+          "up_to_date": "Aktuell",
+          "running": "Läuft",
+          "too_long": "Zu lang",
+          "needs_confirmation": "Bestätigung nötig",
+          "error": "Fehler"
+        },
+        "state_attributes": {
+          "playlist_name": {
+            "name": "Playlist"
+          },
+          "songs": {
+            "name": "Songs"
+          },
+          "playlist_minutes": {
+            "name": "Minuten Playlist"
+          },
+          "total_minutes": {
+            "name": "Minuten gesamt"
+          },
+          "free_minutes": {
+            "name": "Minuten frei"
+          },
+          "chapters": {
+            "name": "Kapitel"
+          },
+          "foreign_chapters": {
+            "name": "Fremde Kapitel"
+          },
+          "excluded_songs": {
+            "name": "In der App gelöschte Songs"
+          },
+          "mode": {
+            "name": "Modus"
+          },
+          "last_sync": {
+            "name": "Letzter Abgleich"
+          },
+          "last_message": {
+            "name": "Letzte Meldung"
+          },
+          "progress": {
+            "name": "Fortschritt"
+          }
+        }
+      }
+    }
+  },
+  "services": {
+    "sync": {
+      "name": "Abgleichen",
+      "description": "Gleicht die Navidrome-Playlist mit dem Kreativ-Tonie ab. Ohne Ziel: alle Tonies mit Playlist.",
+      "fields": {
+        "restore_deleted": {
+          "name": "Gelöschte wiederherstellen",
+          "description": "Songs, deren Kapitel in der Tonie-App gelöscht wurde, wieder hochladen."
+        },
+        "confirm_removals": {
+          "name": "Entfernen bestätigen",
+          "description": "Auch ausführen, wenn die Playlist leer ist oder mehr als die Hälfte (und mehr als 3) der Kapitel entfernt würde."
+        }
+      }
+    },
+    "adopt": {
+      "name": "Kapitel als Playlist übernehmen",
+      "description": "Ordnet die vorhandenen Kapitel eines Kreativ-Tonies Navidrome-Songs zu. Ohne „Anwenden“ nur Bericht; mit „Anwenden“ wird eine Playlist angelegt und dem Tonie zugeordnet (am Tonie wird nichts geändert).",
+      "fields": {
+        "entity_id": {
+          "name": "Kreativ-Tonie",
+          "description": "Media-Player des Kreativ-Tonies (Toniebox-Integration)."
+        },
+        "config_entry_id": {
+          "name": "Navidrome-Konto",
+          "description": "Zu verwendender Tonie-Sync-Eintrag. Nur nötig, wenn mehrere eingerichtet sind."
+        },
+        "playlist_name": {
+          "name": "Playlist-Name",
+          "description": "Standard: „Tonie <Name>“."
+        },
+        "apply": {
+          "name": "Anwenden",
+          "description": "Playlist anlegen und Zuordnung übernehmen. Ohne: nur Bericht."
+        }
+      }
+    },
+    "search_songs": {
+      "name": "Lieder suchen",
+      "description": "Sucht Lieder in Navidrome und gibt sie zurück (ID, Interpret, Titel, Album, Dauer).",
+      "fields": {
+        "query": {
+          "name": "Suche",
+          "description": "Suchtext (Titel, Interpret oder Album)."
+        },
+        "count": {
+          "name": "Anzahl",
+          "description": "Höchstzahl der Treffer."
+        },
+        "config_entry_id": {
+          "name": "Navidrome-Konto",
+          "description": "Zu verwendender Tonie-Sync-Eintrag. Nur nötig, wenn mehrere eingerichtet sind."
+        }
+      }
+    },
+    "playlist_edit": {
+      "name": "Tonie-Playlist bearbeiten",
+      "description": "Fügt Lieder zur Navidrome-Playlist eines Tonies hinzu oder entfernt sie. Der Tonie selbst ändert sich erst beim nächsten Abgleich.",
+      "fields": {
+        "entity_id": {
+          "name": "Tonie",
+          "description": "Eine Tonie-Sync-Entität des Tonies."
+        },
+        "add_song_ids": {
+          "name": "Lieder hinzufügen",
+          "description": "Navidrome-Lied-IDs zum Anhängen."
+        },
+        "remove_song_ids": {
+          "name": "Lieder entfernen",
+          "description": "Navidrome-Lied-IDs, die aus der Playlist entfernt werden."
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "invalid_target": {
+      "message": "{entity} gehört nicht zu Tonie Sync."
+    },
+    "invalid_tonie": {
+      "message": "{entity} ist kein Kreativ-Tonie."
+    },
+    "not_set_up": {
+      "message": "Tonie Sync ist nicht eingerichtet."
+    },
+    "invalid_entry": {
+      "message": "Dieser Eintrag gehört zu keinem geladenen Tonie-Sync-Eintrag."
+    },
+    "entry_mismatch": {
+      "message": "Die Entität gehört zu einem anderen Tonie-Sync-Eintrag als dem angegebenen."
+    },
+    "multiple_entries": {
+      "message": "Es sind mehrere Tonie-Sync-Einträge eingerichtet; bitte mit config_entry_id einen wählen."
+    }
+  }
+}

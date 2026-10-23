@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 4 * * 1"
+  workflow_dispatch:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.14"  # Home Assistant 2026.10 requires Python >= 3.14.2
+      - run: pip install pytest aiohttp
+      - run: python -m py_compile custom_components/tonie_sync/*.py
+      - run: python -m pytest -q
+
+  hassfest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      # No maintained release tags (latest 1.0.0 is from 2020); the project documents @master
+      - uses: home-assistant/actions/hassfest@master
+
+  hacs:
+    runs-on: ubuntu-latest
+    steps:
+      # Latest tag 22.5.0 is from 2022; HACS documents @main
+      - uses: hacs/action@main
+        with:
+          category: integration
+          # No brand icon yet (home-assistant/brands); remove once it exists
+          ignore: brands

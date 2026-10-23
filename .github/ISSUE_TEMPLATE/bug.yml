@@ -1,0 +1,41 @@
+name: Bug
+description: A sync that fails, changes the wrong chapters or reports a wrong state.
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you did, what you expected and what the Tonie or the status sensor showed instead.
+    validations:
+      required: true
+  - type: input
+    id: state
+    attributes:
+      label: State and last message
+      description: State and the `last_message` attribute of the status sensor.
+      placeholder: "error: ..."
+  - type: textarea
+    id: logs
+    attributes:
+      label: Log
+      description: Lines from the Home Assistant log that mention tonie_sync.
+      render: text
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics
+      description: Attach the diagnostics file (Settings → Devices & services → Tonie Sync → ⋮ → Download diagnostics). The password is redacted, song titles are not. Remove what you would rather not share.
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: Home Assistant, Tonie Sync and the toniebox integration.
+      placeholder: Home Assistant 2026.10.2, Tonie Sync 0.1.0, toniebox 4.0.5
+    validations:
+      required: true
+  - type: input
+    id: server
+    attributes:
+      label: Subsonic server
+      placeholder: Navidrome 0.58

@@ -1,0 +1,206 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect Navidrome",
+        "description": "Credentials for the Navidrome Subsonic API.",
+        "data": {
+          "url": "URL",
+          "username": "Username",
+          "password": "Password"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot reach Navidrome.",
+      "invalid_auth": "Invalid username or password."
+    },
+    "abort": {
+      "already_configured": "This Navidrome account is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Tonies and playlists",
+        "description": "Current assignment (+ = adds, ↻ = replaces):\n{overview}\n\nPick a Tonie to edit it; leave empty and submit to save.",
+        "data": {
+          "tonie": "Edit Tonie",
+          "auto_sync": "Sync automatically (check every 15 min)"
+        }
+      },
+      "tonie": {
+        "title": "{name}",
+        "description": "Navidrome playlist for this Creative Tonie. “(none)” stops syncing (chapters stay on the Tonie).",
+        "data": {
+          "playlist": "Playlist",
+          "mode": "Mode"
+        }
+      }
+    },
+    "abort": {
+      "no_toniebox": "No Creative Tonies found. Is the Toniebox integration set up and loaded?",
+      "cannot_connect": "Cannot reach Navidrome."
+    }
+  },
+  "selector": {
+    "mode": {
+      "options": {
+        "append": "Playlist adds to foreign chapters (they stay at the start)",
+        "replace": "Playlist replaces everything"
+      }
+    }
+  },
+  "entity": {
+    "button": {
+      "sync": {
+        "name": "Sync"
+      }
+    },
+    "sensor": {
+      "status": {
+        "name": "Status",
+        "state": {
+          "pending": "Pending",
+          "up_to_date": "Up to date",
+          "running": "Running",
+          "too_long": "Too long",
+          "needs_confirmation": "Confirmation needed",
+          "error": "Error"
+        },
+        "state_attributes": {
+          "playlist_name": {
+            "name": "Playlist"
+          },
+          "songs": {
+            "name": "Songs"
+          },
+          "playlist_minutes": {
+            "name": "Playlist minutes"
+          },
+          "total_minutes": {
+            "name": "Total minutes"
+          },
+          "free_minutes": {
+            "name": "Minutes free"
+          },
+          "chapters": {
+            "name": "Chapters"
+          },
+          "foreign_chapters": {
+            "name": "Foreign chapters"
+          },
+          "excluded_songs": {
+            "name": "Songs deleted in the app"
+          },
+          "mode": {
+            "name": "Mode"
+          },
+          "last_sync": {
+            "name": "Last sync"
+          },
+          "last_message": {
+            "name": "Last message"
+          },
+          "progress": {
+            "name": "Progress"
+          }
+        }
+      }
+    }
+  },
+  "services": {
+    "sync": {
+      "name": "Sync",
+      "description": "Syncs the Navidrome playlist to the Creative Tonie. Without a target: all Tonies with a playlist.",
+      "fields": {
+        "restore_deleted": {
+          "name": "Restore deleted",
+          "description": "Upload songs again whose chapter was deleted in the Tonie app."
+        },
+        "confirm_removals": {
+          "name": "Confirm removals",
+          "description": "Run even if the playlist is empty or more than half (and more than 3) of the chapters would be removed."
+        }
+      }
+    },
+    "adopt": {
+      "name": "Adopt chapters as playlist",
+      "description": "Matches the existing chapters of a Creative Tonie to Navidrome songs. Without “Apply” only a report; with “Apply” a playlist is created and assigned to the Tonie (nothing is changed on the Tonie).",
+      "fields": {
+        "entity_id": {
+          "name": "Creative Tonie",
+          "description": "Media player of the Creative Tonie (Toniebox integration)."
+        },
+        "config_entry_id": {
+          "name": "Navidrome account",
+          "description": "Tonie Sync entry to use. Only needed if several are set up."
+        },
+        "playlist_name": {
+          "name": "Playlist name",
+          "description": "Default: “Tonie <name>”."
+        },
+        "apply": {
+          "name": "Apply",
+          "description": "Create the playlist and adopt the mapping. Without: report only."
+        }
+      }
+    },
+    "search_songs": {
+      "name": "Search songs",
+      "description": "Searches songs in Navidrome and returns them (ID, artist, title, album, duration).",
+      "fields": {
+        "query": {
+          "name": "Search",
+          "description": "Search text (title, artist or album)."
+        },
+        "count": {
+          "name": "Count",
+          "description": "Maximum number of results."
+        },
+        "config_entry_id": {
+          "name": "Navidrome account",
+          "description": "Tonie Sync entry to use. Only needed if several are set up."
+        }
+      }
+    },
+    "playlist_edit": {
+      "name": "Edit Tonie playlist",
+      "description": "Adds songs to or removes songs from the Navidrome playlist of a Tonie. The Tonie itself only changes with the next sync.",
+      "fields": {
+        "entity_id": {
+          "name": "Tonie",
+          "description": "A Tonie Sync entity of the Tonie."
+        },
+        "add_song_ids": {
+          "name": "Add songs",
+          "description": "Navidrome song IDs to append."
+        },
+        "remove_song_ids": {
+          "name": "Remove songs",
+          "description": "Navidrome song IDs to remove from the playlist."
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "invalid_target": {
+      "message": "{entity} does not belong to Tonie Sync."
+    },
+    "invalid_tonie": {
+      "message": "{entity} is not a Creative Tonie."
+    },
+    "not_set_up": {
+      "message": "Tonie Sync is not set up."
+    },
+    "invalid_entry": {
+      "message": "This config entry does not belong to a loaded Tonie Sync setup."
+    },
+    "entry_mismatch": {
+      "message": "The entity belongs to a different Tonie Sync entry than the one given."
+    },
+    "multiple_entries": {
+      "message": "Several Tonie Sync entries are set up; choose one with config_entry_id."
+    }
+  }
+}

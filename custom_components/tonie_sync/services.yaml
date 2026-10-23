@@ -1,0 +1,61 @@
+sync:
+  target:
+    entity:
+      integration: tonie_sync
+  fields:
+    restore_deleted:
+      default: false
+      selector:
+        boolean:
+    confirm_removals:
+      default: false
+      selector:
+        boolean:
+adopt:
+  fields:
+    entity_id:
+      required: true
+      selector:
+        entity:
+          integration: toniebox
+          domain: media_player
+    config_entry_id:
+      selector:
+        config_entry:
+          integration: tonie_sync
+    playlist_name:
+      selector:
+        text:
+    apply:
+      default: false
+      selector:
+        boolean:
+search_songs:
+  fields:
+    query:
+      required: true
+      selector:
+        text:
+    count:
+      default: 20
+      selector:
+        number:
+          min: 1
+          max: 100
+    config_entry_id:
+      selector:
+        config_entry:
+          integration: tonie_sync
+playlist_edit:
+  fields:
+    entity_id:
+      required: true
+      selector:
+        entity:
+          integration: tonie_sync
+    add_song_ids:
+      selector:
+        object:
+    remove_song_ids:
+      selector:
+        object:
