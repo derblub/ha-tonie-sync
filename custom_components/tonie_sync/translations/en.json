@@ -138,7 +138,7 @@
         },
         "playlist_name": {
           "name": "Playlist name",
-          "description": "Default: “Tonie <name>”."
+          "description": "Default: “Tonie” followed by the Tonie name, for example “Tonie Bedtime”."
         },
         "apply": {
           "name": "Apply",
