@@ -138,7 +138,7 @@
         },
         "playlist_name": {
           "name": "Playlist-Name",
-          "description": "Standard: „Tonie <Name>“."
+          "description": "Standard: „Tonie“ und der Name des Tonies, zum Beispiel „Tonie Gutenacht“."
         },
         "apply": {
           "name": "Anwenden",
