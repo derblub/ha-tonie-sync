@@ -4,10 +4,6 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
-### Changed
-
-- The manifest names the category `media_entertainment.music_radio_services`, so Home Assistant lists the integration next to the other music services.
-
 ## [0.1.0] - 2026-10-23
 
 First public release.

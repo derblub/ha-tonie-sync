@@ -2,7 +2,6 @@
   "domain": "tonie_sync",
   "name": "Tonie Sync (Navidrome)",
   "after_dependencies": ["toniebox"],
-  "categories": ["media_entertainment.music_radio_services"],
   "codeowners": ["@derblub"],
   "config_flow": true,
   "dependencies": [],
